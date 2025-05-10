@@ -16,22 +16,22 @@ const Home = () => {
     {
       id: "premium flavours",
       title: "Premium Flavors",
-      image: "https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=744&q=80"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Ty2OKoCiqMwEOBETx93QIext7pVX2fjRRg&s"
     },
     {
       id: "seasonal flavours",
       title: "Seasonal Flavors",
-      image: "https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=744&q=80"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmcosMQcQCv9KjjQ5E9LsSfQrvPMnND3bo0Q&s"
     },
     {
       id: "cones and bars",
       title: "Cones and Bars",
-      image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA6WZDl-27T_5oqsv0PVzjNHyOZHXbU0kI7g&s"
     },
     {
       id: "fruit based flavours",
       title: "Fruit Based Flavors",
-      image: "https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=744&q=80"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpIQ9O5NSTlFqdDf2MHzOcGNYAi1Y2nH8bSA&s"
     }
   ];
 

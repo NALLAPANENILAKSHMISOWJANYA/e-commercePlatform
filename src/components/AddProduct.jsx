@@ -42,9 +42,7 @@ function AddProduct() {
       console.error("Error adding product:", error.response.data);
     }
   };
-
   console.log(product);
-
   return (
     <div className="adminAddProduct">
       <h2 style={{ textAlign: "center" }}>Add Product</h2>

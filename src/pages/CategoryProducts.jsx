@@ -8,12 +8,22 @@ const CategoryProducts = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check if user is logged in
+    const userId = localStorage.getItem('userid');
+    setIsLoggedIn(!!userId);
+
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/ecom/products/category/${categoryId}`);
-        setProducts(response.data);
+        // Fetch all products first
+        const response = await axios.get('http://localhost:8080/ecom/products/all');
+        // Filter products by category
+        const filteredProducts = response.data.filter(
+          product => product.category.toLowerCase() === categoryId.toLowerCase()
+        );
+        setProducts(filteredProducts);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -53,46 +63,81 @@ const CategoryProducts = () => {
     }
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading">Loading products...</div>
+      </div>
+    );
   }
 
   return (
     <div className="category-products-container">
-      <h1 className="category-title">{categoryTitles[categoryId] || categoryId}</h1>
+      <div className="category-header">
+        <h1 className="category-title">{categoryTitles[categoryId] || categoryId}</h1>
+        <p className="category-description">
+          Discover our delicious {categoryTitles[categoryId]?.toLowerCase() || categoryId} collection
+        </p>
+      </div>
+
       {products.length === 0 ? (
         <div className="no-products">
           <h2>No products found in this category</h2>
+          <p>Please check back later for new additions</p>
+          <button 
+            className="back-to-categories"
+            onClick={() => navigate('/')}
+          >
+            Back to Categories
+          </button>
         </div>
       ) : (
-        <div className="products-grid">
-          {products.map((product) => (
-            <div key={product.productId} className="product-card">
-              <div className="product-image">
-                <img src={product.imageUrl} alt={product.name} />
-              </div>
-              <div className="product-info">
-                <h2 className="product-name">{product.name}</h2>
-                <p className="product-price">₹{product.price}</p>
-                <p className="product-description">{product.description}</p>
-                <div className="product-actions">
-                  <button 
-                    className="add-to-cart-btn"
-                    onClick={() => addToCart(product.productId)}
-                  >
-                    Add to Cart
-                  </button>
-                  <button 
-                    className="view-details-btn"
-                    onClick={() => navigate(`/product/${product.productId}`)}
-                  >
-                    View Details
-                  </button>
+        <>
+          <div className="products-count">
+            Showing {products.length} products
+          </div>
+          <div className="products-grid">
+            {products.map((product) => (
+              <div key={product.productId} className="product-card">
+                <div className="product-image">
+                  <img src={product.imageUrl} alt={product.name} />
+                </div>
+                <div className="product-info">
+                  <h2 className="product-name">{product.name}</h2>
+                  <p className="product-price">₹{product.price}</p>
+                  <p className="product-description">{product.description}</p>
+                  <div className="product-actions">
+                    {isLoggedIn ? (
+                      <button 
+                        className="add-to-cart-btn"
+                        onClick={() => addToCart(product.productId)}
+                      >
+                        Add to Cart
+                      </button>
+                    ) : (
+                      <button 
+                        className="login-to-buy-btn"
+                        onClick={handleLoginClick}
+                      >
+                        Login to Buy
+                      </button>
+                    )}
+                    <button 
+                      className="view-details-btn"
+                      onClick={() => navigate(`/product/${product.productId}`)}
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

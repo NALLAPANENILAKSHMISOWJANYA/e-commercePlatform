@@ -23,7 +23,6 @@ const Navbar = () => {
   const handleLoginClick = () => {
     navigate("/login");
   };
-
   const handleLogoutClick = () => {
     localStorage.removeItem("userid");
     localStorage.removeItem("jwtToken");
